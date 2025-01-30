@@ -15,14 +15,18 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    user = new User({ username, email, password: hashedPassword });
+    const avatar = `https://ui-avatars.com/api/?name=${username}&background=random&color=fff`;
+
+    user = new User({ username, email, password: hashedPassword, avatar });
+
     await user.save();
 
-    res.status(201).json({ message: 'Usuario registrado correctamente' });
+    res.status(201).json({ message: 'Usuario registrado correctamente', user });
   } catch (error) {
     res.status(500).json({ error: 'Error en el servidor' });
   }
 });
+
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;

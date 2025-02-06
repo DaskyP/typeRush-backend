@@ -2,7 +2,6 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
@@ -26,7 +25,6 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Error en el servidor' });
   }
 });
-
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
